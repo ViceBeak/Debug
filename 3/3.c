@@ -1,84 +1,68 @@
 #include <stdio.h>
- 
-int main()
-{
-    int matrix[100][100];
-    int m;
-    int n;
-    int l = 1, i, j, k;
-    scanf("%d%d",&m,&n);
-    for (i = 0; i<m; i++) {
-          for (j = 0; j<n; j++) {
-             scanf("%d",&matrix[i][j]);
-         }
-     }
-     k = 0;
-     i = 0;
-   j = 0;
-    for (;;) {
 
-        for (; j<n - i; j++) {
-             printf("%d",matrix[i][j]);
-             k++;
-             if (k == m*n)
-                 break;
-             else
-                 printf(" ");
-             if (j == n - i - 1) {
-                 i++;
-                 l = 2;
-                break;
-             }
-         }
-         if (k == m*n)
-             break;
- 
-         for (; i<m - n + 1 + j; i++) {
-             printf("%d",matrix[i][j]) ;
-             k++;
-             if (k == m*n)
-                 break;
-             else 
-                 printf(" ");
-             if (i == m - n + j) {
-                 j--;
-                 l = 3;
-                 break;
-             }
-         }
-         if (k == m*n)
-             break;
-         for (; j >= m - 1 - i; j--) {
-             printf("%d",matrix[i][j]) ;
-             k++;
-             if (k == m*n)
-                 break;
-             else
-                 printf(" ");
-             if (j == m - i-1) {
-                 i--;
-                 l = 4;
-                 break;
-             }
-         }
-         if (k == m*n)
-             break;
-         for (; i>j; i--) {
-             printf("%d",matrix[i][j]) ;
-             k++;
-             if (k == m*n)
-                 break;
-             else
-                 printf(" ");
-             if (i == j + 1) {
-                 j++;
-                 l = 1;
-                 break;
-             }
-         }
- 
-         if (k == m*n)
-             break;
-     }
-     return 0;
- }
+    int main() 
+    {
+        int matrix[100][100];
+        int m;
+        int n;
+        scanf("%d%d", &m, &n);
+        int i, j;
+        for (i = 0; i < m; i++) {
+            for (j = 0; j < n; j++) {
+                scanf("%d", &matrix[i][j]);
+            }
+        }
+        int count = 0;
+        if (m == 1) {
+            for (j = 0; j < n; j++) {
+                printf("%d", matrix[0][j]);
+                count++;
+                if (count != m * n) 
+                    printf(" ");
+            }
+        } else if (n == 1) {
+            for (j = 0; j < m; j++) {
+                printf("%d", matrix[j][0]);
+                count++;
+                if (count != m * n) 
+                    printf(" ");
+            }
+        } else {
+            for (i = 0; i / 4 * 2 < m && i / 4 * 2 < n; i++) {
+                switch (i % 4) {
+                    case 0:
+                        for (j = i / 4; j < n - i / 4; j++) {
+                            printf("%d", matrix[i / 4][j]);
+                            count++;
+                            if (count != m * n) 
+                                printf(" ");
+                        }
+                        break;
+                    case 1:
+                        for (j = i / 4 + 1; j < m - i / 4 - 1; j++) {
+                            printf("%d", matrix[j][n - 1 - i / 4]);
+                            count++;
+                            if (count != m * n) 
+                                printf(" ");
+                        }
+                        break;
+                    case 2:
+                        for (j = n - 1 - i / 4; j > i / 4 - 1 && i / 4 != m - i / 4 - 1; j--) {
+                            printf("%d", matrix[m - i / 4 - 1][j]);
+                            count++;
+                            if (count != m * n) 
+                                printf(" ");
+                        }
+                        break;
+                    case 3:
+                        for (j = m - 2 - i / 4; j > i / 4 && i / 4 != n - i / 4 - 1; j--) {
+                            printf("%d", matrix[j][i / 4]);
+                            count++;
+                            if (count != m * n) 
+                                printf(" ");
+                        }
+                        break;
+                }
+            }
+        }
+    } 
