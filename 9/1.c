@@ -11,7 +11,7 @@ int main()
 	
     scanf("%d", &N);
     
-    int step[50];
+    int step[60];
     
     step[0] = 0;
     step[1] = 0;
