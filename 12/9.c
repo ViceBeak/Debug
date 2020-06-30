@@ -10,7 +10,7 @@ int main()
     scanf("%g", &r);
 	
     c = 2 * PI * r;
-    s = PI * r *r;
+    s = PI * r * r;
     
     printf("%.3lf\n", c);
     printf("%.3lf\n", s);
