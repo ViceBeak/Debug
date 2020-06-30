@@ -1,80 +1,42 @@
 #include <stdio.h>
+#include <string.h>
 
-void add(char);
-
-void deletel(char);
-
-int rwx = 0;
-
-int main()
+int main() 
 {
-    /* initiation */
-    char temp;
-    int i = 0;
-
-    while (i < 3) {
-        scanf("%c", &temp);
-
-        if (temp == 'x') {
-            rwx ^= (1 << 0);
-            break;
-        } else if (temp == 'w') {
-            rwx ^= (1 << 1);
-            scanf("%c", &temp);
-            if (temp == 'x') {
-                rwx ^= (1 << 0);
-            }
-            break;
-        } else if (temp == 'r') {
-            rwx ^= (1 << 2);
-            scanf("%c", &temp);
-            if (temp == 'w') {
-                rwx ^= (1 << 1);
-            }
-            scanf("%c", &temp);
-            if (temp == 'x') {
-                rwx ^= (1 << 0);
-            }
-            break;
-        }
-
+    int  i = 0;
+    int  counter = 0;
+	char temp[100][3];
+    char name[3];
+    
+    while (scanf("%s", name) != EOF) {
+        strcpy(temp[i], name);
         i++;
     }
-
-    /* modification */
-    while (scanf("%c", &temp) != EOF) {
-        if (temp == '+') {
-            scanf("%c", &temp);
-            add(temp);
-        } else if (temp == '-') {
-            scanf("%c", &temp);
-            deletel(temp);
-        }
+    for (int j = 0; j < 3; j++) {
+        if ((temp[0][j] == 'w')) {
+            counter += 2;
+    	} else if ((temp[0][j] == 'r')) {
+            counter += 4;
+    	} else if((temp[0][j] == 'x')) {
+            counter += 1;
+    	}
     }
-
-    /* output */
-    printf("%d", rwx);
+    for (int a = 0; a < i; a++) {
+        if ((temp[a][0] == '+' && temp[a][1] == 'r')) {
+            counter += 4;
+        } else if ((temp[a][0] == '+' && temp[a][1] == 'w')) {
+            counter += 2;
+        } else if ((temp[a][0] == '+' && temp[a][1] == 'x')) {
+            counter += 1;
+        } else if ((temp[a][0] == '-' && temp[a][1] == 'r')) {
+            counter -= 4;
+        } else if ((temp[a][0] == '-' && temp[a][1] == 'w')) {
+            counter -= 2;
+        }else if((temp[a][0] == '-' && temp[a][1] == 'x')){
+            counter -= 1;
+        } 
+    }
+    printf("%d", counter);
+    
     return 0;
-}
-
-void add(char input)
-{
-    if (input == 'r' && rwx / 4 != 1) {
-        rwx |= (1 << 2);
-    } else if (input == 'w' && (rwx / 2 % 2 != 1)) {
-        rwx |= (1 << 1);
-    } else if (rwx % 4 != 1) {
-        rwx |= (1 << 0);
-    }
-}
-
-void deletel(char input)
-{
-    if (input == 'r' && rwx / 4 == 1) {
-        rwx &= 3;
-    } else if (input == 'w' && (rwx / 2 % 2 == 1)) {
-        rwx &= 5;
-    } else if (rwx % 4 == 1) {
-        rwx &= 6;
-    }
 }
