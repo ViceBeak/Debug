@@ -21,15 +21,12 @@ double bisection(int p, int q, double (*func)(int, int, double))
     a = 20;
     b = -20;
     c = (a + b)/ 2;
-    while(fabs(f(p,q,c)) >= EPSILON)
-    {
-        if((func(p,q,a) * func(p,q,c)) > 0)
-        {
+    while(fabs(f(p,q,c)) >= EPSILON){
+        if((func(p,q,a) * func(p,q,c)) > 0){
             a = c;
             c = (a + b)/ 2;
         }
-        else if((func(p,q,b) * func(p,q,c)) > 0)
-        {
+        else if((func(p,q,b) * func(p,q,c)) > 0){
             b = c;
             c = (a + b)/ 2;
         }
