@@ -1,33 +1,39 @@
 #include<stdio.h>
 
-    int main()
-    {
-        int a,b,c;
-        scanf("%d-%d-%d", &a, &b, &c);
-        if(b >12 || c > 31 || c < 1){
-            printf("NO");
-        } else if(b == 1 || b == 3 || b == 5 || b == 7 || b == 8 || b == 10 || b == 12){
-            if(c <= 31 && c >= 1){
-                printf("YES");
-            } else {
-                printf("NO");
-            } 
-        } else if(b != 2) {
-            if(c > 30 && c < 1){
-                printf("NO");
-            } else {
-                printf("YES");
-            } 
-        } else if (c <= 28){
-            printf("YES");
-        } else if((a % 100 != 0 && a % 4 == 0) || a % 400 == 0) {
-            if(c <= 29 && c >= 1){
-                printf("YES");
-            } else {
-                printf("NO");
-            }       
-        } else {
-            printf("NO");
-        }     
-        return 0;
-    }
+int main()
+{
+    int year;
+    int month;
+    int day;
+    
+    scanf("%d-%d-%d",&year,&month,&day);
+    
+    if (month > 12 || day >31) { 
+		printf("NO");
+	} else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        if(day <= 31 && day > 0) {
+		    printf("YES");
+		} else {
+		    printf("NO");
+		} 
+    } else if (month != 2){
+        if(day > 30 || day < 1) {
+		    printf("NO");
+		} 
+        else {
+		    printf("YES");
+		} 
+    } else if (day <= 28) {
+	   printf("YES");
+	} else if((year % 100 != 0 && year % 4 == 0) || year % 400 == 0){
+        if (day <= 29 && day > 0) {
+		    printf("YES");
+		} else {
+		    printf("NO");
+		} 
+    } else {
+	    printf("NO");
+	} 
+        
+    return 0;
+}
